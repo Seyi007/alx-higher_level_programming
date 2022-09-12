@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""lists all cities from the database hbtn_0e_4_usa"""
+"""takes in the name of a state as an argument and
+lists all cities of that state,
+using the database hbtn_0e_4_usa"""
 
 if __name__ == '__main__':
 
@@ -14,7 +16,8 @@ if __name__ == '__main__':
                 FROM cities LEFT JOIN states\
                 ON states.id = cities.state_id\
                 WHERE states.name = %s\
-                ORDER BY cities.id ASC", (sys.argv[4]))
+                ORDER BY cities.id ASC", (sys.argv[4],))
     rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    print(", ".join([row[0] for row in rows]))
+    cur.close()
+    db.close()

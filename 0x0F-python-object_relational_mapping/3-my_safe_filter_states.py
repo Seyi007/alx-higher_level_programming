@@ -1,9 +1,10 @@
-#!/usr/bin/env python3
-"""displays all values in the states table of
-   hbtn_0e_0_usa where name matches the argument
-   and is free from sql injection."""
+#!/usr/bin/python3
+"""takes in an argument and displays all values
+in the states table of hbtn_0e_0_usa
+where name matches the argument
+and is safe from SQL injections"""
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     import MySQLdb
     import sys
@@ -13,8 +14,7 @@ if __name__ == "__main__":
 
     cur = db.cursor()
     cur.execute("SELECT * FROM states WHERE name=%s\
-                ORDER BY states.id ASC;".format(sys.argv[4]))
-    row = cur.fetchall()
-
-    for items in row:
-        print(items)
+                ORDER BY states.id ASC", (sys.argv[4],))
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
